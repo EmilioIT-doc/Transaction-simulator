@@ -18,7 +18,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario register(Usuario usuario) {
+    public Usuario register(Usuario usuario) { //Sanitizar el usuario antes de darle save.
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }

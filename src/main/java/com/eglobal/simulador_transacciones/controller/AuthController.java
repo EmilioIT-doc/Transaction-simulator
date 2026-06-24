@@ -32,10 +32,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO request) {
         Usuario usuario = usuarioService.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Credenciales invalidas")); //Autenticación - podrían encontrar un usuario a lo pendejo
 
         if (!passwordEncoder.matches(request.getPassword(), usuario.getPassword())) {
-            throw new RuntimeException("Credenciales incorrectas");
+            throw new RuntimeException("Credenciales invalidas");
         }
 
         String token = jwtService.generateToken(usuario.getUsername(), usuario.getRole());

@@ -38,4 +38,9 @@ public class Transaccion {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    // Relación con el usuario que creó la transacción, permite filtrar el historial por usuario
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 }
